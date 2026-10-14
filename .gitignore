@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+
+# Source material used to build the site — internal email threads and the
+# submitted proposal. Not meant to be published with the website.
+data/
+
+# Local preview configuration for Claude Code
+.claude/

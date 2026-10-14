@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Engineering with Agentic AI: The Future of Software-Intensive Systems — CASCON 2026 Workshop</title>
+<meta name="description" content="Engineering with Agentic AI: The Future of Software-Intensive Systems — a half-day workshop at CASCON 2026 (36th IEEE CASCON), York University, Toronto, on the symbiotic relationship between Software Engineering and Agentic AI.">
+<meta name="author" content="University of Victoria, York University and IBM">
+<meta name="theme-color" content="#0d1130">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Engineering with Agentic AI — CASCON 2026 Workshop">
+<meta property="og:description" content="The Future of Software-Intensive Systems. A half-day CASCON 2026 workshop in Toronto on engineering with — and of — Agentic AI: invited perspectives, interactive working groups and a community roadmap.">
+<meta name="twitter:card" content="summary">
+
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,400..600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+
+<script src="program.js" defer></script>
+<script src="assets/js/render.js" defer></script>
+</head>
+
+<body>
+<a class="skip" href="#program">Skip to program</a>
+
+<header class="nav" id="top">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M16 16C19.5 9.5 29 10 29 16S19.5 22.5 16 16 3 10 3 16s9.5 6.5 13 0Z"/>
+        </svg>
+      </span>
+      <span class="brand-text" data-w="shortTitle">Engineering with Agentic AI</span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav-links" id="nav-links" aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#goals">Goals</a>
+      <a href="#program">Program</a>
+      <a href="#speakers">Speakers</a>
+      <a href="#organizers">Organizers</a>
+      <a class="btn btn-sm btn-accent" href="#attend">Attend</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============================ HERO ============================ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Workshop at <span data-w="conferenceName">CASCON 2026</span> · Toronto</p>
+        <h1 data-w="title">Engineering <em>with</em> Agentic AI</h1>
+        <p class="hero-tagline" data-w="tagline">The Future of Software-Intensive Systems</p>
+        <p class="lede" data-w="intro"></p>
+
+        <div class="cta">
+          <a class="btn btn-accent" href="#program">Explore the program</a>
+          <a class="btn btn-ghost" href="#about">About the workshop</a>
+        </div>
+      </div>
+
+      <!-- Signature graphic: two loops, one continuous flow — engineering WITH
+           Agentic AI (left) and engineering OF Agentic AI (right). Decorative;
+           the same ideas are spelled out in the About section. -->
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 600 440" xmlns="http://www.w3.org/2000/svg" focusable="false">
+          <defs>
+            <linearGradient id="loop-grad" gradientUnits="userSpaceOnUse" x1="90" y1="0" x2="510" y2="0">
+              <stop offset="0" stop-color="#a8a3ff"/>
+              <stop offset=".5" stop-color="#ffffff"/>
+              <stop offset="1" stop-color="#f8bd5c"/>
+            </linearGradient>
+            <radialGradient id="core-glow">
+              <stop offset="0" stop-color="#ffffff" stop-opacity=".55"/>
+              <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="soft-glow" x="-20%" y="-40%" width="140%" height="180%">
+              <feGaussianBlur stdDeviation="8"/>
+            </filter>
+            <path id="loop" d="M300 220C360 95 510 100 510 220S360 345 300 220 90 100 90 220s150 125 210 0Z"/>
+          </defs>
+
+          <!-- the wider ecosystem: satellite agents and their links -->
+          <g class="art-links">
+            <path d="M120 58 172.5 128.1M262 40 172.5 128.1M262 40 370 54M370 54 427.5 128.1M505 66 427.5 128.1M110 384 172.5 311.9M300 398 172.5 311.9M300 398 427.5 311.9M492 382 427.5 311.9"/>
+          </g>
+          <g class="art-sats">
+            <circle cx="120" cy="58" r="3.5" class="sat-with"/>
+            <circle cx="262" cy="40" r="3" class="sat-with"/>
+            <circle cx="370" cy="54" r="3" class="sat-of"/>
+            <circle cx="505" cy="66" r="3.5" class="sat-of"/>
+            <circle cx="110" cy="384" r="3" class="sat-with"/>
+            <circle cx="300" cy="398" r="4"/>
+            <circle cx="492" cy="382" r="3" class="sat-of"/>
+          </g>
+
+          <!-- the loop -->
+          <circle cx="300" cy="220" r="70" fill="url(#core-glow)"/>
+          <use href="#loop" fill="none" stroke="url(#loop-grad)" stroke-width="12" opacity=".38" filter="url(#soft-glow)"/>
+          <use href="#loop" fill="none" stroke="url(#loop-grad)" stroke-width="2.2"/>
+
+          <!-- agents on the loop -->
+          <g class="art-nodes">
+            <circle cx="172.5" cy="128.1" r="7" class="node-with"/>
+            <circle cx="90" cy="220" r="7" class="node-with"/>
+            <circle cx="172.5" cy="311.9" r="7" class="node-with"/>
+            <circle cx="427.5" cy="128.1" r="7" class="node-of"/>
+            <circle cx="510" cy="220" r="7" class="node-of"/>
+            <circle cx="427.5" cy="311.9" r="7" class="node-of"/>
+          </g>
+          <circle cx="300" cy="220" r="17" class="art-halo"/>
+          <circle cx="300" cy="220" r="6.5" fill="#ffffff"/>
+
+          <!-- flow along the loop -->
+          <g class="art-pulses">
+            <circle r="4" fill="#ffffff"><animateMotion dur="20s" repeatCount="indefinite" begin="0s"><mpath href="#loop"/></animateMotion></circle>
+            <circle r="3.2" fill="#ffd795"><animateMotion dur="20s" repeatCount="indefinite" begin="-6.7s"><mpath href="#loop"/></animateMotion></circle>
+            <circle r="3.2" fill="#cfccff"><animateMotion dur="20s" repeatCount="indefinite" begin="-13.4s"><mpath href="#loop"/></animateMotion></circle>
+          </g>
+
+          <!-- words -->
+          <text x="195" y="190" class="art-cap" text-anchor="middle">ENGINEERING</text>
+          <text x="195" y="240" class="art-word art-word-with" text-anchor="middle">with</text>
+          <text x="195" y="268" class="art-cap" text-anchor="middle">AGENTIC AI</text>
+          <text x="405" y="190" class="art-cap" text-anchor="middle">ENGINEERING</text>
+          <text x="405" y="240" class="art-word art-word-of" text-anchor="middle">of</text>
+          <text x="405" y="268" class="art-cap" text-anchor="middle">AGENTIC AI</text>
+
+          <g class="art-labels">
+            <text x="172.5" y="108" text-anchor="middle">BUILD</text>
+            <text x="74" y="224" text-anchor="end">OPERATE</text>
+            <text x="172.5" y="339" text-anchor="middle">EVOLVE</text>
+            <text x="427.5" y="108" text-anchor="middle">CONTEXT</text>
+            <text x="526" y="224">ADAPT</text>
+            <text x="427.5" y="339" text-anchor="middle">GOVERN</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <ul class="facts" aria-label="Key details">
+        <li>
+          <span class="fact-k">Date</span>
+          <span class="fact-v"><span data-w="date">Wednesday, November 11, 2026</span> <span class="badge" data-w="dateNote" data-w-if="dateNote"></span></span>
+        </li>
+        <li><span class="fact-k">Time</span><span class="fact-v" data-w="timeSpan">Half day · 4 hours</span></li>
+        <li>
+          <span class="fact-k">Venue</span>
+          <span class="fact-v"><span data-w="venue">York University, Keele Campus</span><span class="fact-sub" data-w="city">Toronto, Canada</span></span>
+        </li>
+        <li><span class="fact-k">Format</span><span class="fact-v" data-w="format">Invited talks + working groups</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================ ABOUT ============================ -->
+  <section id="about" class="section">
+    <div class="wrap">
+      <p class="kicker">About the workshop</p>
+      <h2>Agentic AI is reshaping software engineering — and must itself be <em>engineered</em></h2>
+      <p class="section-lede">
+        Agentic AI marks a paradigm shift in the engineering of software-intensive systems. Unlike
+        conventional, deterministic applications, agentic systems are decentralized software
+        ecosystems in which specialized autonomous agents use Foundation Models — LLMs and SLMs — as
+        cognitive reasoning engines, planning, deciding and learning to pursue shared goals through
+        coordinated autonomy. This workshop explores the symbiotic relationship between Software
+        Engineering and Agentic AI, in both directions.
+      </p>
+
+      <div class="duo">
+        <article class="duo-card is-with">
+          <p class="duo-dir">Direction 01</p>
+          <h3>Engineering <em>with</em> Agentic AI</h3>
+          <p>Autonomous agents are transforming the software engineering lifecycle — accelerating
+             development and automating complex operations, while making software-intensive systems
+             significantly harder to validate, certify, maintain and evolve.</p>
+          <ul class="duo-points">
+            <li>Agents across development and operations</li>
+            <li>Validating and certifying agent-built systems</li>
+            <li>Maintenance and evolution in the agentic era</li>
+          </ul>
+        </article>
+
+        <div class="duo-link" aria-hidden="true">
+          <span class="duo-link-mark">
+            <svg viewBox="0 0 32 32" width="26" height="26" fill="none" stroke-width="2" stroke-linecap="round">
+              <defs>
+                <linearGradient id="duo-grad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stop-color="#6c63f5"/><stop offset="1" stop-color="#f2a93b"/>
+                </linearGradient>
+              </defs>
+              <path stroke="url(#duo-grad)" d="M16 16C19.5 9.5 29 10 29 16S19.5 22.5 16 16 3 10 3 16s9.5 6.5 13 0Z"/>
+            </svg>
+          </span>
+        </div>
+
+        <article class="duo-card is-of">
+          <p class="duo-dir">Direction 02</p>
+          <h3>Engineering <em>of</em> Agentic AI</h3>
+          <p>The operational uncertainty inherent to agentic ecosystems demands new design
+             abstractions, reference architectures and runtime engineering techniques to build,
+             operate, govern and evolve resilient multi-agent systems.</p>
+          <ul class="duo-points">
+            <li>Dynamic context management</li>
+            <li>Adaptive control and runtime V&amp;V</li>
+            <li>Reference architectures for multi-agent systems</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="traits">
+        <p class="traits-head">Why agentic systems are hard to engineer</p>
+        <ul class="traits-list">
+          <li>
+            <span class="trait-word">Probabilistic</span>
+            <p>Agents rely on probabilistic reasoning models, so their behaviour is non-deterministic by design.</p>
+          </li>
+          <li>
+            <span class="trait-word">Uncertain</span>
+            <p>They depend on highly uncertain context: a volatile environment and the unpredictable,
+               emergent behaviour of coordinating agents.</p>
+          </li>
+          <li>
+            <span class="trait-word">Stateful</span>
+            <p>Yet they must reliably remember past actions, track multi-step progress toward shared
+               goals, and keep context across agents, tools and users.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ GOALS ============================ -->
+  <section id="goals" class="section section-alt">
+    <div class="wrap">
+      <p class="kicker">Goals</p>
+      <h2>What the workshop sets out to do</h2>
+      <p class="section-lede">
+        The workshop brings together researchers and practitioners around the engineering of
+        software-intensive systems in the Agentic AI era.
+      </p>
+
+      <div class="cards">
+        <article class="card">
+          <span class="card-num">01</span>
+          <h3>Map challenges and opportunities</h3>
+          <p>Discuss the challenges and opportunities of engineering software-intensive systems with
+             Agentic AI, across the full lifecycle.</p>
+        </article>
+        <article class="card">
+          <span class="card-num">02</span>
+          <h3>Confront runtime uncertainty</h3>
+          <p>Examine critical runtime challenges: dynamic context management — including memory
+             staleness and context relevance — adaptive control, self-adaptation, runtime governance
+             and viability-zone enforcement under high operational uncertainty.</p>
+        </article>
+        <article class="card">
+          <span class="card-num">03</span>
+          <h3>Build a connected community</h3>
+          <p>Connect researchers, industrial practitioners and students to foster cross-sector
+             partnerships, joint research initiatives and collaborative networks at the intersection
+             of Agentic AI and Software Engineering.</p>
+        </article>
+      </div>
+
+      <div class="topics">
+        <p class="kicker">Topics</p>
+        <ul class="chips" id="topics"></ul>
+      </div>
+
+      <div class="audience">
+        <h3>Who should attend</h3>
+        <ul class="audience-list">
+          <li>
+            <h4>Academic researchers</h4>
+            <p>In software engineering, self-adaptive systems, autonomous agents, context-aware
+               computing, runtime engineering and related fields.</p>
+          </li>
+          <li>
+            <h4>Industrial practitioners</h4>
+            <p>Ready to share experiences and challenges from engineering software-intensive systems
+               in the Agentic AI era.</p>
+          </li>
+          <li>
+            <h4>Graduate students &amp; early-career researchers</h4>
+            <p>Looking to anchor their research in a fast-moving, high-impact domain.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ PROGRAM ============================ -->
+  <section id="program" class="section">
+    <div class="wrap">
+      <p class="kicker">Program</p>
+      <h2>From invited perspectives to a shared roadmap</h2>
+      <p class="section-lede">
+        <span data-w="date"></span> · <span data-w="timeSpan"></span> ·
+        <span data-w="venue"></span><span data-w-if="room">, <span data-w="room"></span></span>.
+        The workshop moves from keynote-style talks, to hands-on discussion in working groups, to a
+        plenary synthesis of what the groups found.
+      </p>
+      <p class="note" data-w="programNote" data-w-if="programNote"></p>
+
+      <div class="glance">
+        <div class="glance-head">
+          <span class="glance-k">At a glance</span>
+          <span class="glance-total" id="timeline-total"></span>
+        </div>
+        <ol class="timeline" id="timeline"></ol>
+      </div>
+
+      <div id="schedule" class="schedule"></div>
+
+      <p class="fineprint">
+        The workshop is part of the
+        <a data-w-href="workshopsUrl" href="https://conf.researchr.org/track/cascon-2026/casconworkshops2026" target="_blank" rel="noopener">CASCON 2026 workshops program</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================ SPEAKERS ============================ -->
+  <section id="speakers" class="section section-alt">
+    <div class="wrap">
+      <p class="kicker">Speakers</p>
+      <h2>Invited speakers</h2>
+      <p class="section-lede">
+        Invited talks open the workshop with perspectives from academia and industry that frame the
+        challenges and set the agenda for the working groups.
+      </p>
+
+      <ul id="speakers-grid" class="speakers"></ul>
+
+      <div id="speakers-empty" class="empty" hidden>
+        <div class="empty-faces" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+        <div class="empty-copy">
+          <h3>Speakers to be announced</h3>
+          <p>We are inviting leading researchers and practitioners to share their perspectives on
+             engineering with — and of — Agentic AI. Confirmed speakers will appear here as they are
+             announced.</p>
+          <a class="empty-link" data-w-mail href="#attend">Contact the organizers &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ ORGANIZERS ============================ -->
+  <section id="organizers" class="section">
+    <div class="wrap">
+      <p class="kicker">Organizers</p>
+      <h2>Organizing committee</h2>
+      <p class="section-lede">
+        The workshop is organized by researchers and practitioners from the University of Victoria,
+        York University and IBM.
+      </p>
+      <ul id="organizers-grid" class="organizers"></ul>
+    </div>
+  </section>
+
+  <!-- ============================ ATTEND ============================ -->
+  <section id="attend" class="section section-alt">
+    <div class="wrap attend">
+      <div class="attend-main">
+        <p class="kicker">Attend</p>
+        <h2>Join us at <span data-w="conferenceName">CASCON 2026</span> in Toronto</h2>
+        <p class="section-lede">
+          The workshop is part of <span data-w="conferenceName">CASCON 2026</span>, the
+          <span data-w="conferenceFullName"></span>, held <span data-w="conferenceDates"></span> at
+          <span data-w="venue"></span> in Toronto. Attendance is through CASCON registration.
+        </p>
+        <div class="cta">
+          <a class="btn btn-accent" data-w-href="registrationUrl" href="https://conf.researchr.org/home/cascon-2026" target="_blank" rel="noopener">Register for CASCON 2026 &nearr;</a>
+          <a class="btn btn-ghost" data-w-href="conferenceUrl" href="https://conf.researchr.org/home/cascon-2026" target="_blank" rel="noopener">About the conference &nearr;</a>
+        </div>
+        <p class="fineprint">
+          Questions about the workshop? Write to <a data-w-mail="show" href="#">the organizers</a>.
+        </p>
+      </div>
+      <aside class="attend-side" aria-label="Workshop details">
+        <dl>
+          <dt>Date</dt>
+          <dd><span data-w="date"></span> <span class="badge" data-w="dateNote" data-w-if="dateNote"></span></dd>
+          <dt>Time</dt><dd data-w="timeSpan"></dd>
+          <dt>Venue</dt><dd><span data-w="venue"></span><br><span data-w="city"></span></dd>
+          <dt data-w-if="room">Room</dt><dd data-w-if="room" data-w="room"></dd>
+          <dt>Conference</dt><dd><span data-w="conferenceName"></span><br><span class="dd-sub" data-w="conferenceDates"></span></dd>
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-inner">
+      <div>
+        <p class="foot-title" data-w="title">Engineering <em>with</em> Agentic AI</p>
+        <p class="foot-sub"><span data-w="tagline"></span> · <span data-w="conferenceName"></span> · <span data-w="dateShort"></span> · <span data-w="city"></span></p>
+      </div>
+      <nav class="foot-links" aria-label="External links">
+        <a data-w-href="conferenceUrl" href="https://conf.researchr.org/home/cascon-2026" target="_blank" rel="noopener">CASCON 2026</a>
+        <a data-w-href="workshopsUrl" href="https://conf.researchr.org/track/cascon-2026/casconworkshops2026" target="_blank" rel="noopener">Workshops at CASCON</a>
+        <a data-w-mail href="#attend">Contact</a>
+      </nav>
+    </div>
+    <p class="foot-ack">
+      Supported in part by the Natural Sciences and Engineering Research Council of Canada (NSERC),
+      IBM, the University of Victoria and York University.
+    </p>
+  </div>
+</footer>
+
+<noscript>
+  <div class="wrap" style="padding:2rem 0">
+    <p><strong>The program is rendered with JavaScript.</strong> Please enable it, or see the
+    <a href="https://conf.researchr.org/home/cascon-2026">CASCON 2026 website</a>.</p>
+  </div>
+</noscript>
+
+</body>
+</html>
