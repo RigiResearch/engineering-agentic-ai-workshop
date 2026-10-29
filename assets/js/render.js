@@ -15,13 +15,43 @@
     return n;
   };
 
-  const toMinutes = (hhmm) => {
-    const m = /^(\d{1,2}):(\d{2})$/.exec(String(hhmm || "").trim());
-    return m ? (+m[1]) * 60 + (+m[2]) : null;
+  /* "14:45", "2:45 PM" and "2:45pm" all read as minutes after midnight. */
+  const toMinutes = (time) => {
+    const m = /^(\d{1,2}):(\d{2})\s*(?:([ap])\.?\s*m\.?)?$/i.exec(String(time || "").trim());
+    if (!m) return null;
+    let h = +m[1];
+    const ampm = m[3] && m[3].toLowerCase();
+    if (ampm === "p" && h < 12) h += 12;
+    if (ampm === "a" && h === 12) h = 0;
+    return h * 60 + (+m[2]);
   };
 
-  const toClock = (mins) =>
-    String(Math.floor(mins / 60)).padStart(2, "0") + ":" + String(mins % 60).padStart(2, "0");
+  const twelveHour = () => WORKSHOP.timeFormat === "12h";
+  const meridiem = (mins) => (Math.floor(mins / 60) % 24 < 12 ? "AM" : "PM");
+
+  /* Minutes after midnight as a clock time, in the configured format.
+     `bare` leaves out the AM/PM, for the first half of a range. */
+  const toClock = (mins, bare) => {
+    const h = Math.floor(mins / 60) % 24;
+    const mm = String(mins % 60).padStart(2, "0");
+    if (!twelveHour()) return String(h).padStart(2, "0") + ":" + mm;
+    return ((h % 12) || 12) + ":" + mm + (bare ? "" : " " + meridiem(mins));
+  };
+
+  /* "2:45 – 4:15 PM", or "11:30 AM – 1:00 PM" when the range spans noon. */
+  const toRange = (a, b, sep) => {
+    if (b == null) return toClock(a);
+    const bare = twelveHour() && meridiem(a) === meridiem(b);
+    return toClock(a, bare) + sep + toClock(b);
+  };
+
+  /* A time as written in program.js, shown in the configured format. */
+  const timeRange = (start, end) => {
+    const a = toMinutes(start);
+    const b = toMinutes(end);
+    if (a == null) return [start, end].filter(Boolean).join(" – ");
+    return toRange(a, b, " – ");
+  };
 
   const initials = (name) => {
     const parts = String(name).replace(/\(.*?\)/g, "").trim().split(/\s+/);
@@ -53,6 +83,11 @@
   }
 
   const isActivity = (talk) => talk.kind === "activity";
+
+  /* Colour of a session: the first leans iris ("with"), the last amber ("of"),
+     any in between blend the two. */
+  const sessionTone = (i) =>
+    i === 0 ? "tone-with" : i === SESSIONS.length - 1 ? "tone-of" : "tone-blend";
 
   /* A round avatar: the photo when there is one, initials otherwise. */
   function avatar(person, cls) {
@@ -119,11 +154,11 @@
     if (!bar || typeof SESSIONS === "undefined") return;
 
     let total = 0;
-    SESSIONS.forEach((session) => {
+    SESSIONS.forEach((session, i) => {
       const mins = sessionMinutes(session);
       total += mins;
 
-      const seg = el("li", "seg");
+      const seg = el("li", "seg " + sessionTone(i));
       seg.style.flexGrow = String(mins || 1);
       const label = el("span", "seg-label", session.label || "");
       if (mins) label.appendChild(el("span", "seg-mins", mins + " min"));
@@ -136,8 +171,9 @@
       if (breakMins > 0) {
         const gap = el("li", "seg is-break");
         gap.style.flexGrow = String(breakMins);
-        gap.title = b.label;
+        gap.title = b.label + " · " + timeRange(b.start, b.end);
         gap.appendChild(el("span", "seg-label", breakMins + " min"));
+        gap.appendChild(el("span", "seg-title", b.label || "Break"));
         bar.appendChild(gap);
         total += breakMins;
       }
@@ -197,8 +233,9 @@
   }
 
   function talkTag(talk) {
+    if (talk.tag) return talk.tag;
     switch (talk.kind) {
-      case "activity": return talk.tag || "Activity";
+      case "activity": return "Activity";
       case "paper":    return talk.paper ? "Paper " + talk.paper : "Paper";
       case "keynote":  return "Keynote";
       default:         return "Invited talk";
@@ -215,7 +252,7 @@
     /* when: a computed start time, or the length of the slot */
     const when = el("div", "talk-when");
     if (WORKSHOP.showTalkTimes && clock != null) {
-      when.textContent = toClock(clock) + (talk.mins ? "–" + toClock(clock + talk.mins) : "");
+      when.textContent = toRange(clock, talk.mins ? clock + talk.mins : null, "–");
     } else if (talk.mins) {
       when.textContent = talk.mins + " min";
     }
@@ -278,8 +315,10 @@
     const root = document.getElementById("schedule");
     if (!root || typeof SESSIONS === "undefined") return;
 
-    SESSIONS.forEach((session) => {
-      const card = el("article", "session");
+    if (WORKSHOP.showTalkTimes) root.classList.add("has-times");
+
+    SESSIONS.forEach((session, i) => {
+      const card = el("article", "session " + sessionTone(i));
       card.id = (session.label || "session").toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
       const head = el("header", "session-head");
@@ -287,9 +326,7 @@
 
       const mins = sessionMinutes(session);
       if (session.start) {
-        head.appendChild(
-          el("span", "session-time", session.start + (session.end ? " – " + session.end : ""))
-        );
+        head.appendChild(el("span", "session-time", timeRange(session.start, session.end)));
       } else if (mins) {
         head.appendChild(el("span", "session-time", mins + " min"));
       }
@@ -313,7 +350,7 @@
       if (session.breakAfter) {
         const b = session.breakAfter;
         const gap = el("div", "gap");
-        const time = [b.start, b.end].filter(Boolean).join(" – ");
+        const time = b.start ? timeRange(b.start, b.end) : "";
         gap.appendChild(el("span", null, time ? b.label + " · " + time : b.label));
         root.appendChild(gap);
       }

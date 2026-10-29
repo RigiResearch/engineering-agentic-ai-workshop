@@ -2,8 +2,8 @@
 
 Website for **Engineering with Agentic AI: The Future of Software-Intensive Systems**, a half-day
 workshop at [CASCON 2026](https://conf.researchr.org/home/cascon-2026), the 36th IEEE International
-Conference on Collaborative Advances in Software and Computing — tentatively Wednesday,
-November 11, 2026, York University (Keele Campus), Toronto.
+Conference on Collaborative Advances in Software and Computing — Wednesday, November 11, 2026,
+2:45–6:15 PM, York University (Keele Campus), Toronto.
 
 Organized by researchers from the University of Victoria, York University and IBM.
 
@@ -13,23 +13,24 @@ Static HTML/CSS/JS — no build step, no dependencies.
 
 ## Updating the program
 
-**Edit [`program.js`](program.js) and nothing else.** The three parts of the workshop, talks,
+**Edit [`program.js`](program.js) and nothing else.** The two sessions of the workshop, talks,
 speakers, organizers and topics all live there; the page is rendered from that file. Save,
 refresh, done.
 
 | I want to…                         | Do this in `program.js`                                          |
 | ---------------------------------- | ---------------------------------------------------------------- |
-| Confirm an invited speaker         | Fill in `speaker`, `affiliation`, `title` on an open Part I slot |
+| Confirm an invited speaker         | Fill in `speaker`, `affiliation`, `title` on the open Session 1 slot |
 | Add a speaker photo / homepage     | Add `photo` and/or `url` to that talk                            |
-| Add or remove a talk               | Add/delete an object in that part's `talks` array                |
-| Add a session or break             | Copy a whole `SESSIONS` block, or add `breakAfter` to a part     |
+| Add or remove a talk               | Add/delete an object in that session's `talks` array             |
+| Add a session or break             | Copy a whole `SESSIONS` block, or add `breakAfter` to a session  |
 | Mark a slot as not yet filled      | Leave out `speaker` — it renders as "Speaker to be announced"    |
 | Add an abstract for a talk         | Add `abstract` to that talk — optional, and collapsed by default |
 | Add a speaker bio                  | Add `bio` to that talk — same idea, shown as its own toggle      |
-| Edit the working-group themes      | Edit the `groups` list of Part II                                |
-| Set the clock times                | Set `start` / `end` on each part, and `timeSpan` in `WORKSHOP`   |
+| Edit the working-group themes      | Edit the `groups` list of Session 2                              |
+| Change the clock times             | Edit `start` / `end` on each session (`"14:45"` or `"2:45 PM"`), and `timeSpan` in `WORKSHOP` |
+| Switch between 2:45 PM and 14:45   | Set `timeFormat: "12h"` or `"24h"`                              |
 | Show a start time for every talk   | Set `showTalkTimes: true` (times are computed from `mins`)       |
-| Confirm the date                   | Edit `date` / `dateShort`, and set `dateNote: ""`                |
+| Mark the date as tentative         | Set `dateNote: "Tentative"` (`""` hides the badge)              |
 | Set the room                       | Fill in `room` (it stays hidden while empty)                     |
 | Change the venue, links, contact   | Edit the fields at the top of `WORKSHOP`                         |
 | Remove the "preliminary" banner    | Set `programNote: ""`                                            |
@@ -47,6 +48,7 @@ Talk fields (all optional except `mins`):
   abstract: `Full abstract text.`,    // omit -> no abstract shown
   bio: `Speaker biography.`,          // omit -> no bio shown
   kind: "invited",                    // "keynote", "invited", "paper" or "activity"
+  tag: "Vision talk",                 // optional: custom text for the tag (otherwise from kind)
   mins: 25,                           // slot length, talk + questions
   note: "To be confirmed"             // small caveat chip
 }

@@ -9,22 +9,25 @@
    QUICK GUIDE
    -----------
    1. Confirm a speaker      -> fill in `speaker`, `affiliation` and `title` on
-                                one of the open "invited" slots in Part I. The
+                                the open "invited" slot in Session 1. The
                                 Speakers section updates itself.
-   2. Add / remove a talk    -> add or delete an object in that part's `talks`.
+   2. Add / remove a talk    -> add or delete an object in that session's `talks`.
    3. A slot not yet filled  -> just leave out `speaker` (it renders as "Speaker
                                 to be announced" and is excluded from the
                                 Speakers grid).
    4. Abstract / bio         -> add `abstract` and/or `bio` to that talk (see
                                 below). Both are optional and independent.
-   5. Session clock times    -> set `start` / `end` on each part once CASCON
-                                assigns the slot. Until then the length of each
-                                part is shown instead.
-   6. Talk clock times       -> set `showTalkTimes: true` below. Start times are
-                                then computed from the part's `start` and each
+   5. Session clock times    -> `start` / `end` on each session, written either
+                                as "14:45" or "2:45 PM". Leave them empty and the
+                                length of the session is shown instead.
+   6. Clock style            -> `timeFormat: "12h"` shows "2:45 PM";
+                                `timeFormat: "24h"` shows "14:45".
+   7. Talk clock times       -> set `showTalkTimes: true` below. Start times are
+                                then computed from the session's `start` and each
                                 talk's `mins`.
-   7. Date confirmed         -> set `dateNote: ""` to remove the "Tentative" badge.
-   8. Emphasis               -> in WORKSHOP texts, wrap a word in *asterisks* to
+   8. Tentative date         -> set `dateNote: "Tentative"` to show a badge next
+                                to the date; `""` hides it.
+   9. Emphasis               -> in WORKSHOP texts, wrap a word in *asterisks* to
                                 set it in italics (as in "Engineering *with*").
 
    TALK FIELDS (all optional except `mins`)
@@ -47,7 +50,8 @@
                                             it has a `title`, an optional
                                             `lead` and `detail`, and never
                                             counts as an open speaker slot.
-     tag         "Opening"                  custom tag text for activities
+     tag         "Vision talk"              custom text for the tag on the right
+                                            (otherwise it follows `kind`)
      paper       "12"                       paper number, for kind: "paper"
      mins        25                         length in minutes (talk + questions)
      note        "To be confirmed"          small caveat chip
@@ -84,8 +88,8 @@ const WORKSHOP = {
   /* ---- When & where ---- */
   date: "Wednesday, November 11, 2026",
   dateShort: "Wed 11 Nov 2026",
-  dateNote: "Tentative",             // badge next to the date; set to "" once confirmed
-  timeSpan: "Half day · 4 hours",    // e.g. "09:00 – 13:00" once CASCON assigns the slot
+  dateNote: "",                      // e.g. "Tentative" shows a badge next to the date
+  timeSpan: "2:45 PM – 6:15 PM",
   format: "Invited talks + working groups",
   venue: "York University, Keele Campus",
   city: "Toronto, Canada",
@@ -102,48 +106,73 @@ const WORKSHOP = {
   contactEmail: "rivera@uvic.ca",
 
   /* ---- Display switches ---- */
+  timeFormat: "12h",                 // "12h" -> 2:45 PM, "24h" -> 14:45
   showTalkTimes: false,              // true -> compute a start time for every talk
   programNote:
-    "Preliminary program. The date, times and invited speakers will be confirmed closer to the event."
+    "Preliminary program. The running order and the remaining invited talk are still being finalized."
 };
 
 /* ==========================================================================
-   PROGRAM — the three parts of the workshop
+   PROGRAM — the two sessions of the workshop
    `short` is the label used in the at-a-glance timeline bar.
-   `groups` (optional) lists the discussion themes shown under a part.
+   `groups` (optional) lists the discussion themes shown under a session.
    ========================================================================== */
 
 const SESSIONS = [
   {
-    label: "Part I",
+    label: "Session 1",
     short: "Perspectives",
     title: "Welcome, introductory perspectives and setup",
-    start: "",
-    end: "",
+    start: "14:45",
+    end: "16:15",
     summary:
-      "Keynote-style presentations from researchers and practitioners that frame the state of " +
-      "the art and motivate the breakout discussions.",
+      "Keynote-style presentations that frame the state of the art and motivate the breakout " +
+      "discussions.",
     talks: [
       { kind: "activity", tag: "Opening", title: "Welcome and workshop overview", lead: "Workshop organizers", mins: 10 },
-      { kind: "invited", mins: 25 },
-      { kind: "invited", mins: 25 },
+      {
+        speaker: "Norha M. Villegas",
+        affiliation: "University of Victoria",
+        title: "Why Trust in Agentic AI Systems is a Context Engineering and System Control Problem, Not a Model Problem",
+        kind: "invited",
+        tag: "Vision talk",
+        mins: 25,
+        abstract: `As Agentic AI transitions from experimental prototypes to mission-critical deployments, agentic systems face fundamental operational challenges: non-deterministic execution, memory staleness ("context rot"), and alignment drift. These challenges do not stem from model limitations, but from an architectural deficit in context engineering and system control. Attempting to govern autonomous agents through prompt engineering or model scaling alone fails because probabilistic reasoning engines cannot self-regulate their own operational envelopes, context lifecycles, or shifting system goals.
+
+        In this vision talk, I argue that establishing certifiable trust in agentic AI requires a control-engineered software paradigm that decouples probabilistic reasoning engines from the external software architectures that govern them. Grounded in self-adaptive systems research and our DYNAMICO reference model, I frame agentic governance around two foundational pillars: external control loops that bound non-deterministic actions within certifiable viability zones, and dynamic context management that actively governs the context lifecycle (acquisition, relevance filtering, decay, and disposal) to prevent error cascades. This talk offers a strategic vision for how software engineering can provide the abstractions and foundations required to transition agentic AI from fragile, prompt-bound scripts to resilient, certifiable software ecosystems.`,
+        bio: `Norha M. Villegas, Ph.D., is an internationally recognized software engineering leader with over 20 years of professional experience, currently serving as a Professor and Director of the Bachelor of Software Engineering Program in the Department of Computer Science and the Department of Electrical and Computer Engineering at the University of Victoria (UVic). Her work integrates software engineering research, interdisciplinary collaboration, and STEM education to tackle complex societal challenges. Prior to her full-time appointment at UVic in July 2026, she was the Dean of the Faculty of Engineering, Design, and Applied Sciences at Universidad Icesi in Colombia, where she significantly advanced the regional tech ecosystem, STEM research, and nationwide higher education. Her academic and professional background spans foundational contributions to intelligent, resilient, and trustworthy software-intensive systems—including self-adaptive systems, digital twins, context-aware computing, and agentic AI ecosystems. Dr. Villegas has fostered robust global collaborations across Europe, North America, and Latin America, and she was the first woman in Colombia to achieve IEEE Senior Member status. Her dedication to expanding diversity, mentoring hundreds of women, and championing inclusion in technology and STEM education has earned her prestigious global recognitions, including the 2022 Globant Women that Build – Global Digital Leader Award.`
+      },
+      {
+        speaker: "Ratnadira Widyasari",
+        affiliation: "University of Victoria",
+        title: "More Agents, More Trust? Lessons from AI Agents in Software Quality Assurance",
+        kind: "invited",
+        mins: 25,
+        abstract: `AI agents are now used to detect vulnerabilities, review pull requests, and suggest fixes, but do agentic designs actually help, and how do developers respond to what agents produce? Drawing on my recent work, this talk shows that multi-agent collaboration can substantially improve vulnerability detection and even uncover zero-day vulnerabilities. However, more orchestration is not automatically better, and polished explanations do not necessarily indicate whether an agent is correct. Through an analysis of thousands of agent-generated code review comments, we also find that developers value concrete and actionable comments. These findings suggest that more agents do not automatically earn more trust: agent output should be judged by whether it helps developers make correct decisions, not by how convincing it sounds.`,
+        bio: `Ratnadira Widyasari is an Assistant Professor in the Department of Computer Science at the University of Victoria. Her research focuses on advancing software quality assurance through automation and explainability, with a particular interest in how AI and LLMs can help build more reliable, transparent, and effective software engineering tools. Her research has been published in leading software engineering venues, including the ICSE and FSE conferences and the TSE, TOSEM, and EMSE journals. Beyond her research, she is passionate about communicating technical ideas to broader audiences and making research more accessible to the public. In 2025, she was named one of Singapore’s 100 Women in Tech.`
+      },
       { kind: "invited", mins: 25 },
       { kind: "activity", tag: "Setup", title: "Forming the working groups", mins: 5 }
-    ]
+    ],
+    breakAfter: { label: "Break", start: "16:15", end: "16:45" }
   },
 
   {
-    label: "Part II",
-    short: "Working groups",
-    title: "Interactive working groups",
-    start: "",
-    end: "",
+    label: "Session 2",
+    short: "Working groups & synthesis",
+    title: "Interactive working groups, synthesis and community roadmap",
+    start: "16:45",
+    end: "18:15",
     summary:
       "Attendees split into breakout clusters to discuss research challenges and opportunities " +
-      "in specific areas. The themes below are a starting point, to be refined with speakers " +
-      "and participants.",
+      "in specific areas. Each group then reports its findings in a moderated plenary that " +
+      "consolidates them into shared research directions and collaboration opportunities. The " +
+      "themes below are a starting point, to be refined with speakers and participants.",
     talks: [
-      { kind: "activity", tag: "Breakouts", title: "Breakout working groups", detail: "Parallel discussions, one cluster per theme", mins: 90 }
+      { kind: "activity", tag: "Breakouts", title: "Breakout working groups", detail: "Parallel discussions, one cluster per theme", mins: 50 },
+      { kind: "activity", tag: "Reports", title: "Working-group reports", mins: 20 },
+      { kind: "activity", tag: "Plenary", title: "Moderated plenary discussion and community roadmap", mins: 15 },
+      { kind: "activity", tag: "Closing", title: "Closing remarks", lead: "Workshop organizers", mins: 5 }
     ],
     groups: [
       {
@@ -170,22 +199,6 @@ const SESSIONS = [
           "Design abstractions and reference architectures for decentralized, cooperating " +
           "agents built on Foundation Models."
       }
-    ]
-  },
-
-  {
-    label: "Part III",
-    short: "Synthesis",
-    title: "Synthesis, reports and community roadmap",
-    start: "",
-    end: "",
-    summary:
-      "Each group reports its findings, followed by a moderated plenary discussion that " +
-      "consolidates them into shared research directions and collaboration opportunities.",
-    talks: [
-      { kind: "activity", tag: "Reports", title: "Working-group reports", mins: 30 },
-      { kind: "activity", tag: "Plenary", title: "Moderated plenary discussion and community roadmap", mins: 25 },
-      { kind: "activity", tag: "Closing", title: "Closing remarks", lead: "Workshop organizers", mins: 5 }
     ]
   }
 ];
