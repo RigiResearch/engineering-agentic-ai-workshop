@@ -8,9 +8,9 @@
 
    QUICK GUIDE
    -----------
-   1. Confirm a speaker      -> fill in `speaker`, `affiliation` and `title` on
-                                the open "invited" slot in Session 1. The
-                                Speakers section updates itself.
+   1. Edit a speaker         -> change `speaker`, `affiliation` and `title` on
+                                that talk in Session 1. The Speakers section
+                                updates itself.
    2. Add / remove a talk    -> add or delete an object in that session's `talks`.
    3. A slot not yet filled  -> just leave out `speaker` (it renders as "Speaker
                                 to be announced" and is excluded from the
@@ -109,7 +109,7 @@ const WORKSHOP = {
   timeFormat: "12h",                 // "12h" -> 2:45 PM, "24h" -> 14:45
   showTalkTimes: false,              // true -> compute a start time for every talk
   programNote:
-    "Preliminary program. The running order and the remaining invited talk are still being finalized."
+    "Preliminary program. The running order and timings within each session may still change."
 };
 
 /* ==========================================================================
@@ -151,7 +151,16 @@ const SESSIONS = [
         abstract: `AI agents are now used to detect vulnerabilities, review pull requests, and suggest fixes, but do agentic designs actually help, and how do developers respond to what agents produce? Drawing on my recent work, this talk shows that multi-agent collaboration can substantially improve vulnerability detection and even uncover zero-day vulnerabilities. However, more orchestration is not automatically better, and polished explanations do not necessarily indicate whether an agent is correct. Through an analysis of thousands of agent-generated code review comments, we also find that developers value concrete and actionable comments. These findings suggest that more agents do not automatically earn more trust: agent output should be judged by whether it helps developers make correct decisions, not by how convincing it sounds.`,
         bio: `Ratnadira Widyasari is an Assistant Professor in the Department of Computer Science at the University of Victoria. Her research focuses on advancing software quality assurance through automation and explainability, with a particular interest in how AI and LLMs can help build more reliable, transparent, and effective software engineering tools. Her research has been published in leading software engineering venues, including the ICSE and FSE conferences and the TSE, TOSEM, and EMSE journals. Beyond her research, she is passionate about communicating technical ideas to broader audiences and making research more accessible to the public. In 2025, she was named one of Singapore’s 100 Women in Tech.`
       },
-      { kind: "invited", mins: 25 },
+      {
+        speaker: "Ladan Tahvildari",
+        affiliation: "University of Waterloo",
+        title: "From Code Generation to Autonomous Systems: Engineering Quality in Agentic AI",
+        kind: "invited",
+        mins: 25,
+        note: "Presented with PhD students Shizhe Lin, Majid Dashtbani and Hasti Ghaneshirazi",
+        abstract: `As Large Language Models evolve from passive code generators into autonomous systems, software engineering faces a critical imperative: guaranteeing functional correctness, execution scalability, and system reliability within stochastic environments. Addressing this challenge requires moving beyond ad-hoc prompting toward a principled discipline for engineering quality directly into agentic software workflows. This talk outlines the research vision of the Software Technologies Applied Research (STAR) Lab at the University of Waterloo, structured around two complementary perspectives: Engineering Agentic AI (advancing agent intelligence and decision-making) and Engineering Software with AI (harnessing AI to modernize systems and automate workflows). Within this dual framework, our research advances four interconnected fronts. To enhance agent intelligence, we first quantify what an agent knows and when it is uncertain through real-time state estimation. To govern agent behaviour, we guide planning and orchestration through structured search, coordinating multi-step execution while preventing agent bloat. Shifting focus to the software systems being engineered, we leverage AI to automatically transform legacy microservices into scalable, future-ready architectures. Finally, to ensure the dependability of AI-driven analysis, we establish selective invariance and prediction robustness to guarantee explainable, trustworthy outcomes. By unifying these directions into a cohesive narrative, this presentation highlights our latest breakthroughs in real-time uncertainty estimation, demonstrating how bridging agent state awareness with automated software workflows unlocks the full potential of dependable Agentic AI.`,
+        bio: `Ladan Tahvildari is a Professor in the Department of Electrical and Computer Engineering and Director of the Software Technologies Applied Research (STAR) Lab at the University of Waterloo. In this presentation, she outlines the STAR lab’s unified vision for engineering quality in Agentic AI alongside PhD students Shizhe Lin, Majid Dashtbani, and Hasti Ghaneshirazi. Together, the team introduces the lab’s foundational research pillars: Shizhe Lin addresses agent uncertainty estimation and multi-agent planning and orchestration (Engineering Agentic AI); Majid Dashtbani details experience-driven frameworks for legacy microservice transformation and cloud scalability (Engineering Software with AI); and Hasti Ghaneshirazi presents methods for ensuring prediction robustness, explanation fidelity, and trustworthiness in AI-driven software analysis (Engineering Software with AI).`
+      },
       { kind: "activity", tag: "Setup", title: "Forming the working groups", mins: 5 }
     ],
     breakAfter: { label: "Break", start: "16:15", end: "16:45" }

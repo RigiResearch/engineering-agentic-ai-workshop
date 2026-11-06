@@ -19,7 +19,7 @@ refresh, done.
 
 | I want to…                         | Do this in `program.js`                                          |
 | ---------------------------------- | ---------------------------------------------------------------- |
-| Confirm an invited speaker         | Fill in `speaker`, `affiliation`, `title` on the open Session 1 slot |
+| Edit an invited speaker            | Change `speaker`, `affiliation`, `title` on that Session 1 talk  |
 | Add a speaker photo / homepage     | Add `photo` and/or `url` to that talk                            |
 | Add or remove a talk               | Add/delete an object in that session's `talks` array             |
 | Add a session or break             | Copy a whole `SESSIONS` block, or add `breakAfter` to a session  |

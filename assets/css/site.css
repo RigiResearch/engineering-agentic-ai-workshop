@@ -599,7 +599,7 @@ a:hover { color: var(--link-hover); }
 /* ------------------------------ speakers -------------------------------- */
 .speakers {
   list-style: none; padding: 0; margin: 2.2rem 0 0;
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem;
 }
 .speaker {
   display: flex; gap: 1rem; align-items: flex-start;
