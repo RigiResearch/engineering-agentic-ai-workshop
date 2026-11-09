@@ -39,7 +39,8 @@ Talk fields (all optional except `mins`):
 
 ```js
 {
-  speaker: "Jane Doe",                // omit -> "Speaker to be announced"
+  speaker: "Jane Doe",                // omit -> "Speaker to be announced";
+                                      // ["Jane Doe", "John Roe"] for several presenters
   affiliation: "University of Toronto",
   title: "Title of the talk",         // shown when known
   topic: "Short topic",               // fallback when the title isn't known

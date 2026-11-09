@@ -84,6 +84,12 @@
 
   const isActivity = (talk) => talk.kind === "activity";
 
+  /* `speaker` is one name, or a list of names for a talk with several presenters. */
+  const speakerNames = (talk) => [].concat(talk.speaker || []).filter(Boolean);
+  const joinNames = (names) =>
+    names.length < 2 ? names.join("") : names.slice(0, -1).join(", ") + " and " + names[names.length - 1];
+  const speakerLabel = (talk) => joinNames(speakerNames(talk));
+
   /* Colour of a session: the first leans iris ("with"), the last amber ("of"),
      any in between blend the two. */
   const sessionTone = (i) =>
@@ -101,8 +107,18 @@
       img.decoding = "async";
       box.appendChild(img);
     } else {
-      box.textContent = initials(person.name || person.speaker || "");
+      box.textContent = initials(person.name || speakerLabel(person));
     }
+    return box;
+  }
+
+  /* Several presenters: up to four small initials in a 2×2 cluster, "+N" for the rest. */
+  function avatarGroup(names) {
+    const box = el("span", "avatar-group");
+    box.setAttribute("aria-hidden", "true");
+    const shown = names.length > 4 ? names.slice(0, 3) : names;
+    shown.forEach((n) => box.appendChild(el("span", "avatar", initials(n))));
+    if (names.length > 4) box.appendChild(el("span", "avatar is-extra", "+" + (names.length - 3)));
     return box;
   }
 
@@ -219,13 +235,13 @@
       more.appendChild(
         renderDisclosure(
           "abstract", "Abstract", talk.abstract,
-          talk.title || talk.topic || talk.speaker || "this talk"
+          talk.title || talk.topic || speakerLabel(talk) || "this talk"
         )
       );
     }
     if (talk.bio) {
       more.appendChild(
-        renderDisclosure("bio", "Bio", talk.bio, talk.speaker || "the speaker")
+        renderDisclosure("bio", "Bio", talk.bio, speakerLabel(talk) || "the speaker")
       );
     }
 
@@ -246,7 +262,7 @@
     const activity = isActivity(talk);
     const row = el(
       "li",
-      "talk" + (activity ? " is-activity" : talk.speaker ? "" : " is-tba")
+      "talk" + (activity ? " is-activity" : speakerNames(talk).length ? "" : " is-tba")
     );
 
     /* when: a computed start time, or the length of the slot */
@@ -268,8 +284,8 @@
       body.appendChild(name);
       if (talk.detail) body.appendChild(el("p", "talk-topic", talk.detail));
     } else {
-      if (talk.speaker) {
-        name.appendChild(document.createTextNode(talk.speaker));
+      if (speakerNames(talk).length) {
+        name.appendChild(document.createTextNode(speakerLabel(talk)));
         if (talk.affiliation) name.appendChild(el("span", "talk-aff", talk.affiliation));
       } else {
         name.textContent = "Speaker to be announced";
@@ -370,16 +386,18 @@
     SESSIONS.forEach((session) => {
       (session.talks || []).forEach((talk) => {
         if (isActivity(talk)) return;
-        if (!talk.speaker) { openSlots++; return; }
-        const key = talk.speaker.toLowerCase();
+        const names = speakerNames(talk);
+        if (!names.length) { openSlots++; return; }
+        const label = joinNames(names);
+        const key = label.toLowerCase();
         if (seen.has(key)) return;
         seen.add(key);
         confirmed++;
 
-        const item = el("li", "speaker");
-        item.appendChild(avatar(talk, "avatar-lg"));
+        const item = el("li", "speaker" + (names.length > 1 ? " is-group" : ""));
+        item.appendChild(names.length > 1 ? avatarGroup(names) : avatar(talk, "avatar-lg"));
         const meta = el("div", "speaker-meta");
-        meta.appendChild(maybeLink(talk.speaker, talk.url, "speaker-name"));
+        meta.appendChild(maybeLink(label, talk.url, "speaker-name"));
         if (talk.affiliation) meta.appendChild(el("div", "speaker-aff", talk.affiliation));
         const detail = talk.title || talk.topic;
         if (detail) meta.appendChild(el("p", "speaker-talk", detail));

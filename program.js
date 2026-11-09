@@ -33,6 +33,7 @@
    TALK FIELDS (all optional except `mins`)
    ----------------------------------------
      speaker     "Jane Doe"                 omit -> "Speaker to be announced"
+                 ["Jane Doe", "John Roe"]   a list for several presenters
      affiliation "University of Toronto"
      title       "Title of the talk"        shown when known
      topic       "Short topic"              fallback when the title isn't known
@@ -129,14 +130,14 @@ const SESSIONS = [
       "Keynote-style presentations that frame the state of the art and motivate the breakout " +
       "discussions.",
     talks: [
-      { kind: "activity", tag: "Opening", title: "Welcome and workshop overview", lead: "Workshop organizers", mins: 10 },
+      { kind: "activity", tag: "Opening", title: "Welcome and workshop overview", lead: "Workshop organizers", mins: 5 },
       {
         speaker: "Norha M. Villegas",
         affiliation: "University of Victoria",
         title: "Why Trust in Agentic AI Systems is a Context Engineering and System Control Problem, Not a Model Problem",
         kind: "invited",
         tag: "Vision talk",
-        mins: 25,
+        mins: 20,
         abstract: `As Agentic AI transitions from experimental prototypes to mission-critical deployments, agentic systems face fundamental operational challenges: non-deterministic execution, memory staleness ("context rot"), and alignment drift. These challenges do not stem from model limitations, but from an architectural deficit in context engineering and system control. Attempting to govern autonomous agents through prompt engineering or model scaling alone fails because probabilistic reasoning engines cannot self-regulate their own operational envelopes, context lifecycles, or shifting system goals.
 
         In this vision talk, I argue that establishing certifiable trust in agentic AI requires a control-engineered software paradigm that decouples probabilistic reasoning engines from the external software architectures that govern them. Grounded in self-adaptive systems research and our DYNAMICO reference model, I frame agentic governance around two foundational pillars: external control loops that bound non-deterministic actions within certifiable viability zones, and dynamic context management that actively governs the context lifecycle (acquisition, relevance filtering, decay, and disposal) to prevent error cascades. This talk offers a strategic vision for how software engineering can provide the abstractions and foundations required to transition agentic AI from fragile, prompt-bound scripts to resilient, certifiable software ecosystems.`,
@@ -147,7 +148,7 @@ const SESSIONS = [
         affiliation: "University of Victoria",
         title: "More Agents, More Trust? Lessons from AI Agents in Software Quality Assurance",
         kind: "invited",
-        mins: 25,
+        mins: 20,
         abstract: `AI agents are now used to detect vulnerabilities, review pull requests, and suggest fixes, but do agentic designs actually help, and how do developers respond to what agents produce? Drawing on my recent work, this talk shows that multi-agent collaboration can substantially improve vulnerability detection and even uncover zero-day vulnerabilities. However, more orchestration is not automatically better, and polished explanations do not necessarily indicate whether an agent is correct. Through an analysis of thousands of agent-generated code review comments, we also find that developers value concrete and actionable comments. These findings suggest that more agents do not automatically earn more trust: agent output should be judged by whether it helps developers make correct decisions, not by how convincing it sounds.`,
         bio: `Ratnadira Widyasari is an Assistant Professor in the Department of Computer Science at the University of Victoria. Her research focuses on advancing software quality assurance through automation and explainability, with a particular interest in how AI and LLMs can help build more reliable, transparent, and effective software engineering tools. Her research has been published in leading software engineering venues, including the ICSE and FSE conferences and the TSE, TOSEM, and EMSE journals. Beyond her research, she is passionate about communicating technical ideas to broader audiences and making research more accessible to the public. In 2025, she was named one of Singapore’s 100 Women in Tech.`
       },
@@ -156,10 +157,16 @@ const SESSIONS = [
         affiliation: "University of Waterloo",
         title: "From Code Generation to Autonomous Systems: Engineering Quality in Agentic AI",
         kind: "invited",
-        mins: 25,
+        mins: 20,
         note: "Presented with PhD students Shizhe Lin, Majid Dashtbani and Hasti Ghaneshirazi",
         abstract: `As Large Language Models evolve from passive code generators into autonomous systems, software engineering faces a critical imperative: guaranteeing functional correctness, execution scalability, and system reliability within stochastic environments. Addressing this challenge requires moving beyond ad-hoc prompting toward a principled discipline for engineering quality directly into agentic software workflows. This talk outlines the research vision of the Software Technologies Applied Research (STAR) Lab at the University of Waterloo, structured around two complementary perspectives: Engineering Agentic AI (advancing agent intelligence and decision-making) and Engineering Software with AI (harnessing AI to modernize systems and automate workflows). Within this dual framework, our research advances four interconnected fronts. To enhance agent intelligence, we first quantify what an agent knows and when it is uncertain through real-time state estimation. To govern agent behaviour, we guide planning and orchestration through structured search, coordinating multi-step execution while preventing agent bloat. Shifting focus to the software systems being engineered, we leverage AI to automatically transform legacy microservices into scalable, future-ready architectures. Finally, to ensure the dependability of AI-driven analysis, we establish selective invariance and prediction robustness to guarantee explainable, trustworthy outcomes. By unifying these directions into a cohesive narrative, this presentation highlights our latest breakthroughs in real-time uncertainty estimation, demonstrating how bridging agent state awareness with automated software workflows unlocks the full potential of dependable Agentic AI.`,
         bio: `Ladan Tahvildari is a Professor in the Department of Electrical and Computer Engineering and Director of the Software Technologies Applied Research (STAR) Lab at the University of Waterloo. In this presentation, she outlines the STAR lab’s unified vision for engineering quality in Agentic AI alongside PhD students Shizhe Lin, Majid Dashtbani, and Hasti Ghaneshirazi. Together, the team introduces the lab’s foundational research pillars: Shizhe Lin addresses agent uncertainty estimation and multi-agent planning and orchestration (Engineering Agentic AI); Majid Dashtbani details experience-driven frameworks for legacy microservice transformation and cloud scalability (Engineering Software with AI); and Hasti Ghaneshirazi presents methods for ensuring prediction robustness, explanation fidelity, and trustworthiness in AI-driven software analysis (Engineering Software with AI).`
+      },
+      {
+        speaker: ["Komal Sarda", "Amr Zaki", "Ian Watts", "Marin Litoiu"],
+        title: "When GenAI Becomes Your Software Reliability Engineer: What Can and Cannot be Automated",
+        kind: "invited",
+        mins: 20
       },
       { kind: "activity", tag: "Setup", title: "Forming the working groups", mins: 5 }
     ],
