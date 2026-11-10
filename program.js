@@ -130,7 +130,7 @@ const SESSIONS = [
       "Keynote-style presentations that frame the state of the art and motivate the breakout " +
       "discussions.",
     talks: [
-      { kind: "activity", tag: "Opening", title: "Welcome and workshop overview", lead: "Workshop organizers", mins: 5 },
+      { kind: "activity", tag: "Opening", title: "Welcome and workshop overview", lead: "Workshop organizers", mins: 10 },
       {
         speaker: "Norha M. Villegas",
         affiliation: "University of Victoria",
@@ -163,31 +163,44 @@ const SESSIONS = [
         bio: `Ladan Tahvildari is a Professor in the Department of Electrical and Computer Engineering and Director of the Software Technologies Applied Research (STAR) Lab at the University of Waterloo. In this presentation, she outlines the STAR lab’s unified vision for engineering quality in Agentic AI alongside PhD students Shizhe Lin, Majid Dashtbani, and Hasti Ghaneshirazi. Together, the team introduces the lab’s foundational research pillars: Shizhe Lin addresses agent uncertainty estimation and multi-agent planning and orchestration (Engineering Agentic AI); Majid Dashtbani details experience-driven frameworks for legacy microservice transformation and cloud scalability (Engineering Software with AI); and Hasti Ghaneshirazi presents methods for ensuring prediction robustness, explanation fidelity, and trustworthiness in AI-driven software analysis (Engineering Software with AI).`
       },
       {
-        speaker: ["Komal Sarda", "Amr Zaki", "Ian Watts", "Marin Litoiu"],
+        speaker: ["Komal Sarda", "Amr Zaki", "Marin Litoiu"],
+        affiliation: "York University",
         title: "When GenAI Becomes Your Software Reliability Engineer: What Can and Cannot be Automated",
         kind: "invited",
         mins: 20
-      },
-      { kind: "activity", tag: "Setup", title: "Forming the working groups", mins: 5 }
+      }
     ],
     breakAfter: { label: "Break", start: "16:15", end: "16:45" }
   },
 
   {
     label: "Session 2",
-    short: "Working groups & synthesis",
-    title: "Interactive working groups, synthesis and community roadmap",
+    short: "Industry view & working groups",
+    title: "Industry perspective, working groups and community roadmap",
     start: "16:45",
     end: "18:15",
     summary:
-      "Attendees split into breakout clusters to discuss research challenges and opportunities " +
-      "in specific areas. Each group then reports its findings in a moderated plenary that " +
-      "consolidates them into shared research directions and collaboration opportunities. The " +
-      "themes below are a starting point, to be refined with speakers and participants.",
+      "An industry talk opens the session with directions and challenges for the working " +
+      "groups. Attendees then split into breakout clusters to discuss research challenges and " +
+      "opportunities in specific areas, and each group reports its findings in a moderated " +
+      "plenary that consolidates them into shared research directions and collaboration " +
+      "opportunities. If attendance is small, the working groups become a single general " +
+      "discussion. The themes below are a starting point, to be refined with speakers and " +
+      "participants.",
     talks: [
-      { kind: "activity", tag: "Breakouts", title: "Breakout working groups", detail: "Parallel discussions, one cluster per theme", mins: 50 },
-      { kind: "activity", tag: "Reports", title: "Working-group reports", mins: 20 },
-      { kind: "activity", tag: "Plenary", title: "Moderated plenary discussion and community roadmap", mins: 15 },
+      {
+        speaker: "Ian Watts",
+        affiliation: "IBM",
+        title: "Gen AI and Automation: An Industry Perspective",
+        kind: "invited",
+        tag: "Industry talk",
+        mins: 20,
+        note: "Tentative title"
+      },
+      { kind: "activity", tag: "Setup", title: "Forming the working groups", mins: 5 },
+      { kind: "activity", tag: "Breakouts", title: "Breakout working groups", detail: "Parallel discussions, one cluster per theme, or a single general discussion if attendance is small", mins: 35 },
+      { kind: "activity", tag: "Reports", title: "Working-group reports", mins: 15 },
+      { kind: "activity", tag: "Plenary", title: "Moderated plenary discussion and community roadmap", mins: 10 },
       { kind: "activity", tag: "Closing", title: "Closing remarks", lead: "Workshop organizers", mins: 5 }
     ],
     groups: [
