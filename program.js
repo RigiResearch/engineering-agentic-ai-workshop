@@ -194,7 +194,7 @@ const SESSIONS = [
     summary:
       "An industry talk opens the session with directions and challenges for the working " +
       "groups. Attendees then split into three working groups, one per theme: Context, Control " +
-      "and Assurances for Agentic AI. Each group reports its findings in a moderated plenary " +
+      "and Assurance for Agentic AI. Each group reports its findings in a moderated plenary " +
       "that consolidates them into shared research directions and collaboration opportunities. " +
       "If attendance is small, the working groups become a single general discussion on the " +
       "same themes.",
@@ -260,7 +260,7 @@ const SESSIONS = [
         ]
       },
       {
-        title: "Assurances",
+        title: "Assurance",
         summary:
           "Establishing trust in behaviour that is probabilistic and evolving, and in what " +
           "agents produce.",
