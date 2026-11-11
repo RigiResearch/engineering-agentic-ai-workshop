@@ -29,6 +29,11 @@
                                 to the date; `""` hides it.
    9. Emphasis               -> in WORKSHOP texts, wrap a word in *asterisks* to
                                 set it in italics (as in "Engineering *with*").
+  10. Padlet board           -> `padletUrl` and `padletQr` below. Set
+                                `padletUrl: ""` to hide the Padlet section, the
+                                "Join the Padlet" buttons and the QR screen.
+                                Adding #qr to the address (site/#qr) opens the
+                                QR code full screen, for the projector.
 
    TALK FIELDS (all optional except `mins`)
    ----------------------------------------
@@ -106,6 +111,10 @@ const WORKSHOP = {
   workshopsUrl: "https://conf.researchr.org/track/cascon-2026/casconworkshops2026",
   contactEmail: "rivera@uvic.ca",
 
+  /* ---- Live participation: the workshop's Padlet board ---- */
+  padletUrl: "https://padlet.com/rivera_qtb4/engineering-with-agentic-ai-2026-s025d4aqbplwhcuytf85",
+  padletQr: "assets/img/padlet-qr.png",   // the QR code image; it points to the board above
+
   /* ---- Display switches ---- */
   timeFormat: "12h",                 // "12h" -> 2:45 PM, "24h" -> 14:45
   showTalkTimes: false,              // true -> compute a start time for every talk
@@ -116,7 +125,10 @@ const WORKSHOP = {
 /* ==========================================================================
    PROGRAM — the two sessions of the workshop
    `short` is the label used in the at-a-glance timeline bar.
-   `groups` (optional) lists the discussion themes shown under a session.
+   `groups` (optional) lists the discussion themes shown under a session,
+   with an optional `groupsIntro` sentence above them. Each theme has a
+   `title`, an optional `summary` and optional `questions`, one per lens:
+   the first is shown in amber, the second in iris.
    ========================================================================== */
 
 const SESSIONS = [
@@ -134,7 +146,7 @@ const SESSIONS = [
       {
         speaker: "Norha M. Villegas",
         affiliation: "University of Victoria",
-        title: "Why Trust in Agentic AI Systems is a Context Engineering and System Control Problem, Not a Model Problem",
+        title: "Context Engineering, Self-Adaptation and Runtime Governance in Agentic AI Ecosystems",
         kind: "invited",
         tag: "Vision talk",
         mins: 20,
@@ -181,12 +193,11 @@ const SESSIONS = [
     end: "18:15",
     summary:
       "An industry talk opens the session with directions and challenges for the working " +
-      "groups. Attendees then split into breakout clusters to discuss research challenges and " +
-      "opportunities in specific areas, and each group reports its findings in a moderated " +
-      "plenary that consolidates them into shared research directions and collaboration " +
-      "opportunities. If attendance is small, the working groups become a single general " +
-      "discussion. The themes below are a starting point, to be refined with speakers and " +
-      "participants.",
+      "groups. Attendees then split into three working groups, one per theme: Context, Control " +
+      "and Assurances for Agentic AI. Each group reports its findings in a moderated plenary " +
+      "that consolidates them into shared research directions and collaboration opportunities. " +
+      "If attendance is small, the working groups become a single general discussion on the " +
+      "same themes.",
     talks: [
       {
         speaker: "Ian Watts",
@@ -198,35 +209,75 @@ const SESSIONS = [
         note: "Tentative title"
       },
       { kind: "activity", tag: "Setup", title: "Forming the working groups", mins: 5 },
-      { kind: "activity", tag: "Breakouts", title: "Breakout working groups", detail: "Parallel discussions, one cluster per theme, or a single general discussion if attendance is small", mins: 35 },
+      { kind: "activity", tag: "Breakouts", title: "Breakout working groups", detail: "Parallel discussions, one group per theme, or a single general discussion on the same themes if attendance is small", mins: 35 },
       { kind: "activity", tag: "Reports", title: "Working-group reports", mins: 15 },
       { kind: "activity", tag: "Plenary", title: "Moderated plenary discussion and community roadmap", mins: 10 },
       { kind: "activity", tag: "Closing", title: "Closing remarks", lead: "Workshop organizers", mins: 5 }
     ],
+    groupsIntro:
+      "Each theme is discussed in both directions: Software Engineering for Agentic AI " +
+      "(engineering agentic systems) and Agentic AI for Software Engineering (agents " +
+      "engineering software).",
     groups: [
       {
-        title: "Agents across the software lifecycle",
+        title: "Context",
         summary:
-          "How autonomous agents change development and operations — and what that means for " +
-          "validating, certifying, maintaining and evolving software."
+          "Context management: what agents need to know and remember, and when context goes " +
+          "stale.",
+        questions: [
+          {
+            lens: "SENG for Agentic AI",
+            text:
+              "How do we dynamically manage the context lifecycle (acquisition, relevance, " +
+              "versioning, decay, disposal) so agents remember what matters and drop what is stale?"
+          },
+          {
+            lens: "Agentic AI for SENG",
+            text:
+              "What code, requirements and runtime behaviour do agents need to act reliably " +
+              "across the software lifecycle?"
+          }
+        ]
       },
       {
-        title: "Dynamic context and memory",
+        title: "Control",
         summary:
-          "Keeping agents stateful: context relevance, memory staleness, and context shared " +
-          "across agents, tools and users."
+          "Control actions: which decisions agents may take on their own, and what keeps them " +
+          "within safe limits.",
+        questions: [
+          {
+            lens: "SENG for Agentic AI",
+            text:
+              "Which external control loops keep non-deterministic agents within their viability " +
+              "zones, and when should a human step in?"
+          },
+          {
+            lens: "Agentic AI for SENG",
+            text:
+              "Which development and operations actions can we safely hand over to agents, and " +
+              "which must stay with engineers?"
+          }
+        ]
       },
       {
-        title: "Runtime governance and adaptive control",
+        title: "Assurances",
         summary:
-          "Self-adaptation, runtime V&V and viability-zone enforcement under high operational " +
-          "uncertainty."
-      },
-      {
-        title: "Architectures for multi-agent ecosystems",
-        summary:
-          "Design abstractions and reference architectures for decentralized, cooperating " +
-          "agents built on Foundation Models."
+          "Establishing trust in behaviour that is probabilistic and evolving, and in what " +
+          "agents produce.",
+        questions: [
+          {
+            lens: "SENG for Agentic AI",
+            text:
+              "How do we verify, validate and certify systems whose behaviour is probabilistic " +
+              "and keeps changing at runtime?"
+          },
+          {
+            lens: "Agentic AI for SENG",
+            text:
+              "How do we judge agent output: by whether it helps developers make correct " +
+              "decisions, not by how convincing it sounds?"
+          }
+        ]
       }
     ]
   }

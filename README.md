@@ -26,7 +26,9 @@ refresh, done.
 | Mark a slot as not yet filled      | Leave out `speaker` — it renders as "Speaker to be announced"    |
 | Add an abstract for a talk         | Add `abstract` to that talk — optional, and collapsed by default |
 | Add a speaker bio                  | Add `bio` to that talk — same idea, shown as its own toggle      |
-| Edit the working-group themes      | Edit the `groups` list of Session 2                              |
+| Edit the working-group themes      | Edit the `groups` list of Session 2 (each theme can list its `questions`, one per lens) |
+| Change the Padlet board or its QR  | Edit `padletUrl` and `padletQr`; `padletUrl: ""` hides the Padlet section and buttons |
+| Show the Padlet QR on a projector  | Click **Show QR code full screen**, or open the site with `#qr` at the end of the address |
 | Change the clock times             | Edit `start` / `end` on each session (`"14:45"` or `"2:45 PM"`), and `timeSpan` in `WORKSHOP` |
 | Switch between 2:45 PM and 14:45   | Set `timeFormat: "12h"` or `"24h"`                              |
 | Show a start time for every talk   | Set `showTalkTimes: true` (times are computed from `mins`)       |

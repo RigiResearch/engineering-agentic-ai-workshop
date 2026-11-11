@@ -147,6 +147,11 @@
       if (value) node.setAttribute("href", value);
     });
 
+    document.querySelectorAll("[data-w-src]").forEach((node) => {
+      const value = WORKSHOP[node.dataset.wSrc];
+      if (value) node.setAttribute("src", value);
+    });
+
     document.querySelectorAll("[data-w-mail]").forEach((node) => {
       if (!WORKSHOP.contactEmail) return;
       node.href = "mailto:" + WORKSHOP.contactEmail;
@@ -310,17 +315,35 @@
     return row;
   }
 
-  function renderGroups(groups) {
+  /* The discussion themes under a session. Three themes sit side by side;
+     two or four make a two-column grid. Each theme's optional `questions`
+     are one per lens: the first in amber, the second in iris. */
+  function renderGroups(session) {
+    const groups = session.groups;
     const wrap = el("div", "groups");
     wrap.appendChild(el("p", "groups-head", "Discussion themes"));
-    const list = el("ol", "group-list");
+    if (session.groupsIntro) wrap.appendChild(el("p", "groups-intro", session.groupsIntro));
+
+    const n = groups.length;
+    const list = el("ol", "group-list cols-" + (n === 1 ? 1 : n === 2 || n === 4 ? 2 : 3));
     groups.forEach((g, i) => {
       const item = el("li", "group");
-      item.appendChild(el("span", "group-num", String(i + 1).padStart(2, "0")));
-      const text = el("div");
-      text.appendChild(el("h4", "group-title", g.title));
-      if (g.summary) text.appendChild(el("p", "group-summary", g.summary));
-      item.appendChild(text);
+      const head = el("div", "group-head");
+      head.appendChild(el("span", "group-num", String(i + 1).padStart(2, "0")));
+      head.appendChild(el("h4", "group-title", g.title));
+      item.appendChild(head);
+      if (g.summary) item.appendChild(el("p", "group-summary", g.summary));
+
+      if (g.questions && g.questions.length) {
+        const qs = el("div", "group-qs");
+        g.questions.forEach((q, j) => {
+          const box = el("div", "group-q " + (j % 2 ? "lens-with" : "lens-of"));
+          if (q.lens) box.appendChild(el("p", "group-lens", q.lens));
+          box.appendChild(el("p", "group-question", q.text || ""));
+          qs.appendChild(box);
+        });
+        item.appendChild(qs);
+      }
       list.appendChild(item);
     });
     wrap.appendChild(list);
@@ -360,7 +383,7 @@
       });
       card.appendChild(list);
 
-      if (session.groups && session.groups.length) card.appendChild(renderGroups(session.groups));
+      if (session.groups && session.groups.length) card.appendChild(renderGroups(session));
       root.appendChild(card);
 
       if (session.breakAfter) {
@@ -464,6 +487,59 @@
     document.addEventListener("click", (e) => { if (!nav.contains(e.target)) setOpen(false); });
   }
 
+  /* --------------------- Padlet QR, full screen ------------------------- */
+  /* "Show QR code full screen" (and a click on the QR itself) opens a screen
+     with nothing but a large QR code, for the projector. Opening the page at
+     #qr does the same. Without JavaScript, the QR simply links to the board. */
+  function initQrScreen() {
+    const dialog = document.getElementById("qr-dialog");
+    if (!dialog || typeof dialog.showModal !== "function") return;
+
+    let wentFullscreen = false;
+
+    /* The QR screen opens at once; full screen, when the browser allows it,
+       follows. Going full screen can draw the page over the dialog, so the
+       dialog is then opened again on top. */
+    const open = (fullscreen) => {
+      if (!dialog.open) dialog.showModal();
+      const root = document.documentElement;
+      if (!fullscreen || !root.requestFullscreen || document.fullscreenElement) return;
+      root.requestFullscreen()
+        .then(() => {
+          wentFullscreen = true;
+          if (dialog.open) { dialog.close(); dialog.showModal(); }
+        })
+        .catch(() => {});
+    };
+
+    document.querySelectorAll("[data-qr-open]").forEach((node) => {
+      node.hidden = false;
+      node.addEventListener("click", (e) => { e.preventDefault(); open(true); });
+    });
+
+    dialog.addEventListener("close", () => {
+      if (dialog.open) return;                         // closed only to be redrawn on top
+      if (wentFullscreen && document.fullscreenElement && document.exitFullscreen) {
+        document.exitFullscreen().catch(() => {});
+      }
+      wentFullscreen = false;
+      if (location.hash === "#qr") history.replaceState(null, "", location.pathname + location.search);
+    });
+
+    /* Esc in full screen leaves full screen; close the QR screen with it. */
+    document.addEventListener("fullscreenchange", () => {
+      if (!document.fullscreenElement && wentFullscreen && dialog.open) dialog.close();
+    });
+
+    const closeBtn = dialog.querySelector("[data-qr-close]");
+    if (closeBtn) closeBtn.addEventListener("click", () => dialog.close());
+    dialog.addEventListener("click", (e) => { if (e.target === dialog) dialog.close(); });
+
+    const fromHash = () => { if (location.hash === "#qr") open(false); };
+    window.addEventListener("hashchange", fromHash);
+    fromHash();
+  }
+
   /* -------------------------------- go ---------------------------------- */
   function init() {
     initNav();
@@ -477,6 +553,7 @@
     renderSessions();
     renderSpeakers();
     renderOrganizers();
+    initQrScreen();
   }
 
   if (document.readyState === "loading") {

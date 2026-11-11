@@ -37,6 +37,8 @@
       <span class="brand-text" data-w="shortTitle">Engineering with Agentic AI</span>
     </a>
 
+    <a class="btn btn-sm btn-accent nav-cta" href="#padlet" data-w-if="padletUrl">Padlet</a>
+
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
@@ -47,7 +49,8 @@
       <a href="#program">Program</a>
       <a href="#speakers">Speakers</a>
       <a href="#organizers">Organizers</a>
-      <a class="btn btn-sm btn-accent" href="#attend">Attend</a>
+      <a href="#attend">Attend</a>
+      <a class="btn btn-sm btn-accent" href="#padlet" data-w-if="padletUrl">Join the Padlet</a>
     </nav>
   </div>
 </header>
@@ -64,8 +67,8 @@
         <p class="lede" data-w="intro"></p>
 
         <div class="cta">
-          <a class="btn btn-accent" href="#program">Explore the program</a>
-          <a class="btn btn-ghost" href="#about">About the workshop</a>
+          <a class="btn btn-accent" href="#padlet" data-w-if="padletUrl">Join the workshop Padlet</a>
+          <a class="btn btn-ghost" href="#program">Explore the program</a>
         </div>
       </div>
 
@@ -161,6 +164,33 @@
         </li>
         <li><span class="fact-k">Format</span><span class="fact-v" data-w="format">Invited talks + working groups</span></li>
       </ul>
+    </div>
+  </section>
+
+  <!-- ============================ PADLET ============================ -->
+  <!-- Shown while WORKSHOP.padletUrl is set. -->
+  <section id="padlet" class="live" data-w-if="padletUrl" aria-labelledby="padlet-title">
+    <div class="wrap">
+      <div class="live-card">
+        <div class="live-copy">
+          <p class="live-pill"><span class="live-dot" aria-hidden="true"></span>Join the conversation</p>
+          <h2 id="padlet-title">Ask questions and share notes on <em>Padlet</em></h2>
+          <p class="live-text">
+            Scan the code to join the workshop's Padlet board. Post questions for the speakers, notes,
+            links and ideas throughout the workshop, and see what other participants share.
+          </p>
+          <div class="cta">
+            <a class="btn btn-accent" data-w-href="padletUrl" href="https://padlet.com/rivera_qtb4/engineering-with-agentic-ai-2026-s025d4aqbplwhcuytf85" target="_blank" rel="noopener">Open the Padlet &nearr;</a>
+            <button class="btn btn-ghost" type="button" data-qr-open hidden>Show QR code full screen</button>
+          </div>
+        </div>
+        <a class="live-qr" data-w-href="padletUrl" href="https://padlet.com/rivera_qtb4/engineering-with-agentic-ai-2026-s025d4aqbplwhcuytf85" target="_blank" rel="noopener" data-qr-open
+           aria-label="Workshop Padlet board (QR code)">
+          <img data-w-src="padletQr" src="assets/img/padlet-qr.png" width="1070" height="1070"
+               alt="QR code for the workshop's Padlet board">
+          <span class="live-qr-cap">Scan to join</span>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -425,6 +455,23 @@
     </p>
   </div>
 </footer>
+
+<!-- Full-screen QR code for the projector: opened by "Show QR code full screen",
+     a click on the QR, or the address ending in #qr. -->
+<dialog class="qr-dialog" id="qr-dialog" data-w-if="padletUrl" aria-labelledby="qr-dialog-title">
+  <div class="qr-stage">
+    <p class="qr-kicker"><span data-w="shortTitle">Engineering with Agentic AI</span> · <span data-w="conferenceName">CASCON 2026</span></p>
+    <h2 id="qr-dialog-title">Scan to join the workshop Padlet</h2>
+    <div class="qr-tile">
+      <img data-w-src="padletQr" src="assets/img/padlet-qr.png" width="1070" height="1070"
+           alt="QR code for the workshop's Padlet board">
+    </div>
+    <p class="qr-sub">Ask questions and share notes throughout the workshop</p>
+  </div>
+  <button class="qr-close" type="button" data-qr-close aria-label="Close the QR code">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+  </button>
+</dialog>
 
 <noscript>
   <div class="wrap" style="padding:2rem 0">
